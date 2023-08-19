@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { Photo } from '../../models/Photo'
+import '../../i18n/i18n'
 import {
   BackButton,
   BackLink,
@@ -11,6 +12,7 @@ import {
   PhotoDescription,
   PhotoPanel,
 } from './styles'
+import { useTranslation } from 'react-i18next'
 
 type Location = {
   state: {
@@ -21,6 +23,7 @@ type Location = {
 const PhotoView = () => {
   const location: Location = useLocation()
   const { photo } = location.state
+  const { t } = useTranslation()
 
   return (
     <Container>
@@ -33,14 +36,14 @@ const PhotoView = () => {
           )}
 
           <PhotoCreationDate>
-            Data de criação: {photo.creationDate.toLocaleDateString()}
+            {t('content.CreationDate')} {photo.creationDate.toLocaleDateString()}
           </PhotoCreationDate>
         </InfoPanel>
       </PhotoPanel>
 
       <BackLinkPanel>
         <BackLink to='/'>
-          <BackButton>Voltar</BackButton>
+          <BackButton>{t('content.back')}</BackButton>
         </BackLink>
       </BackLinkPanel>
     </Container>

@@ -1,0 +1,32 @@
+.header {
+    background-color: #24252a;
+    padding: 10px;
+    display: flex;
+  }
+  
+  
+  .headerTitle {
+    color: white;
+    margin: 0;
+    font-family: 'bold';
+  }
+  
+  .flagButton {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    width: 32px;
+    padding: 0;
+    margin-right: 10px;
+  }
+  
+  .flagButton:first-of-type {
+    margin-left: auto;
+  }
+  
+  .flagButton img {
+    width: 100%;
+  }

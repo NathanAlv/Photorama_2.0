@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useTransition } from 'react'
 
 import { Photo } from '../../models/Photo'
 import { PhotoService } from '../../service/PhotoService'
@@ -19,11 +19,16 @@ import {
 import loadingGif from '../../assets/img/loading.gif'
 import PhotoCard from '../../components/PhotoCard'
 import { UserContext } from '../../context/UserContext'
+import '../../i18n/i18n'
+import { useTranslation } from 'react-i18next'
+import Header from '../../components/Header'
 
 const Home = () => {
+  
   const [loading, isLoading] = useState(false)
 
   const photoService = new PhotoService()
+ 
 
   const {
     query,
@@ -58,12 +63,15 @@ const Home = () => {
   useEffect(() => {
     searchPhotos()
   }, [page])
+  
+  const { t } = useTranslation()
 
   return (
     <Container>
+      <Header />
       <SearchArea>
         <FilterInput
-          placeholder='Digite o termo da busca'
+          placeholder= {t('content.filterSearch')}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -75,7 +83,7 @@ const Home = () => {
               setCriteria(e.target.checked ? 'relevant' : 'latest')
             }
           />
-          <CriteriaOptionLabel>Mais relevantes</CriteriaOptionLabel>
+          <CriteriaOptionLabel>{t('content.relevantMore')}</CriteriaOptionLabel>
 
           <CriteriaOptionButton
             checked={criteria == 'latest'}
@@ -83,10 +91,10 @@ const Home = () => {
               setCriteria(e.target.checked ? 'latest' : 'relevant')
             }
           />
-          <CriteriaOptionLabel>Mais recentes</CriteriaOptionLabel>
+          <CriteriaOptionLabel>{t('content.latter')}</CriteriaOptionLabel>
         </CriteriaPanel>
 
-        <SearchButton onClick={() => searchPhotos()}>Buscar</SearchButton>
+        <SearchButton onClick={() => searchPhotos()}>{t('content.Search')}</SearchButton>
       </SearchArea>
 
       <ResultsArea>
@@ -105,7 +113,7 @@ const Home = () => {
           )}
 
           <CurrentPage>
-            Página {page} de {totalPages}
+           {t('content.Pages')}
           </CurrentPage>
 
           {page < totalPages && (
